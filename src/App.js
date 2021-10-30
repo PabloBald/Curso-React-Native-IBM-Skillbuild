@@ -1,22 +1,13 @@
-import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import NavigationBar from './components/NavigationBar/NavigationBar';
+import { NavigationContainer } from "@react-navigation/native";
+import React from "react";
+import { View,Text } from "react-native";
+import Menu from "./Views/Menu/Menu";
 
 const App = () => {
+
   return (
-    <SafeAreaView>
-      <NavigationBar />
-    </SafeAreaView>
-  );
+    <Menu/>
+  )
 };
 
 export default App;
