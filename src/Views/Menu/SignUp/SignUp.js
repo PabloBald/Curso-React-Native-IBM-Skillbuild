@@ -1,10 +1,10 @@
-import { tSImportEqualsDeclaration } from "@babel/types";
+﻿import { tSImportEqualsDeclaration } from "@babel/types";
 import React from "react";
 import { View,Text,StyleSheet, TextInput } from "react-native"
 import 'react-native-gesture-handler';
 import LoginButtom from "../../../components/LoginButton"
 
-const SignUp = ()=>{
+const Signup= ()=>{
     
     return(
         <View style={styles.mainContainer}>
@@ -94,4 +94,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default SignUp;
+export default Signup;

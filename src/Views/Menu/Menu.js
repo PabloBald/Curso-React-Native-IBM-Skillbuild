@@ -5,8 +5,8 @@ import 'react-native-gesture-handler';
 import MenuHome from "./MenuHome/MenuHome";
 import Equipo from "./Equipo/Equipo";
 import SobreApp from "./SobreApp/SobreApp";
-import Login from "./Login/Login"
-import SignUp from "./SignUp/SignUp";
+import Login from "./Login/Login";
+import Signup from "./Signup/Signup";
 
 
 
@@ -47,8 +47,8 @@ const Menu = ()=>{
         }}/>
 
       <Stack.Screen 
-        name='signUp' 
-        component={ SignUp }
+        name='Signup' 
+        component={ Signup }
         options={{
             title: "Sign Up"
         }}/>
