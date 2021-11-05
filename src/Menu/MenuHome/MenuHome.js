@@ -14,8 +14,8 @@ const MenuHome = ({ navigation })=>{
             </View>
 
             <View style={styles.loginContainer}>
-                <CustomButtom title="Sign up"/>
-                <CustomButtom title="Log in"/>
+                <CustomButtom title="Sign up" onPress={()=> navigation.navigate('Signup')}/>
+                <CustomButtom title="Log in" onPress={()=> navigation.navigate('Login')}/>
             </View>
         </View>
     );

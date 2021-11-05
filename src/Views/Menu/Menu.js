@@ -5,7 +5,7 @@ import 'react-native-gesture-handler';
 import MenuHome from "./MenuHome/MenuHome";
 import Equipo from "./Equipo/Equipo";
 import SobreApp from "./SobreApp/SobreApp";
-import Login from "./Login/Login";
+import Login from "./Login/Login"
 import SignUp from "./SignUp/SignUp";
 
 
@@ -16,7 +16,6 @@ const Menu = ()=>{
   return(
 
     //Menu
-    <NavigationContainer>
       <Stack.Navigator initialRouteName="menu">
         <Stack.Screen
           name='menu'
@@ -53,10 +52,7 @@ const Menu = ()=>{
         options={{
             title: "Sign Up"
         }}/>
-
       </Stack.Navigator>
-    </NavigationContainer>
-  
   );
 }
 

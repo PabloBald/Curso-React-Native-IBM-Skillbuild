@@ -1,8 +1,7 @@
-import { tSImportEqualsDeclaration } from "@babel/types";
 import React from "react";
 import { View,Text,StyleSheet, TextInput } from "react-native"
 import 'react-native-gesture-handler';
-import LoginButtom from "../../../components/LoginButton"
+import LoginButton from "../../../components/LoginButton"
 
 const Login = ()=>{
     
@@ -34,7 +33,7 @@ const Login = ()=>{
             </View>
 
             <View style={styles.loginContainer}>                
-                <LoginButtom title="Log in"/>
+                <LoginButton title="Log in"/>
             </View>
         </View>
     );
