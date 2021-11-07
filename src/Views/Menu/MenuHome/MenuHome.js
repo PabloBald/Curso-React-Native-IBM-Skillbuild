@@ -26,7 +26,7 @@ const MenuHome = ({navigation}) => {
 
       <View style={styles.loginContainer}>
         <CustomButtom
-          onPress={() => navigation.navigate('signUp')}
+          onPress={() => navigation.navigate('SignUp')}
           title="Sign up"
         />
         <CustomButtom
