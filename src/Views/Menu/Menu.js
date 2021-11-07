@@ -1,59 +1,65 @@
-import React from "react";
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import 'react-native-gesture-handler';
-import MenuHome from "./MenuHome/MenuHome";
-import Equipo from "./Equipo/Equipo";
-import SobreApp from "./SobreApp/SobreApp";
-import Login from "./Login/Login"
-import SignUp from "./SignUp/SignUp";
-
-
+import MenuHome from './MenuHome/MenuHome';
+import Equipo from './Equipo/Equipo';
+import SobreApp from './SobreApp/SobreApp';
+import Login from './Login/Login';
+import SignUp from './SignUp/SignUp';
+import {View, Text} from 'react-native';
+import CustomHeader from '../../components/Header/CustomHeader';
 
 const Stack = createNativeStackNavigator();
 
-const Menu = ()=>{
-  return(
-
+const Menu = () => {
+  return (
     //Menu
-      <Stack.Navigator initialRouteName="menu">
-        <Stack.Screen
-          name='menu'
-          component={ MenuHome }
-          options={{ 
-            title: "Menu"
-          }}
-        />
-
-        <Stack.Screen 
-        name='equipo' 
-        component={ Equipo }
+    <Stack.Navigator initialRouteName="menu">
+      <Stack.Screen
+        name="menu"
+        component={MenuHome}
         options={{
-            title: "El equipo"
-        }}/>
+          title: 'Menu',
+          header: () => (
+            <CustomHeader height={80} color="#000000" fontSize={20} />
+          ),
+        }}
+      />
 
-      <Stack.Screen 
-        name='sobreApp' 
-        component={ SobreApp }
+      <Stack.Screen
+        name="equipo"
+        component={Equipo}
         options={{
-            title: "Sobre la App"
-        }}/>
+          title: 'El equipo',
+        }}
+      />
 
-      <Stack.Screen 
-        name='login' 
-        component={ Login }
+      <Stack.Screen
+        name="sobreApp"
+        component={SobreApp}
         options={{
-            title: "Log in"
-        }}/>
+          title: 'Sobre la App',
+        }}
+      />
 
-      <Stack.Screen 
-        name='signUp' 
-        component={ SignUp }
+      <Stack.Screen
+        name="login"
+        component={Login}
         options={{
-            title: "Sign Up"
-        }}/>
-      </Stack.Navigator>
+          title: 'Log in',
+        }}
+      />
+
+      <Stack.Screen
+        name="signUp"
+        component={SignUp}
+        options={{
+          title: 'Sign Up',
+        }}
+      />
+    </Stack.Navigator>
   );
-}
+};
 
 export default Menu;

@@ -1,14 +1,19 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {Text, View, StyleSheet} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Menu from '../../Views/Menu/Menu';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-
 function Home() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#FFF',
+      }}>
       <Text>Home Place Holder!</Text>
     </View>
   );
@@ -16,14 +21,14 @@ function Home() {
 
 function Favorites() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text>Location Place Holder!</Text>
     </View>
   );
 }
 function Search() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text>Search Place Holder!</Text>
     </View>
   );
@@ -31,65 +36,109 @@ function Search() {
 
 const Tab = createBottomTabNavigator();
 
-
 const NavigationBar = props => {
-  return(
-    <Tab.Navigator 
+  return (
+    <Tab.Navigator
       initialRouteName="Home"
-      screenOptions= {{
+      screenOptions={{
         tabBarActiveTintColor: '#444444',
         tabBarInactiveTintColor: '#858585',
-        }}
-        barStyle={{ backgroundColor: '#694fad' }}
-    >
-      <Tab.Screen name="Home" component={Home} options={{
-          tabBarLabel: 'Home',
-          tabBarIcon: ({ color, size }) => (
-            <Icon name="home-outline" color={color} size={size}/>),
-                        
-            }} />
-      <Tab.Screen name="Search" component={Search} 
+        tabBarStyle: styles.tabBarStyle,
+      }}>
+      <Tab.Screen
+        name="Home"
+        component={Home}
         options={{
-        tabBarLabel: 'Search',
-        tabBarIcon: ({ color, size }) => (
-          <Icon name="magnify" color={color} size={size} />
-        ),
-      }}/>
-
-      <Tab.Screen name="Favorites" component={Favorites}  
-      options={{
+          tabBarActiveTintColor: '#444444',
+          tabBarInactiveTintColor: '#858585',
+          tabBarLabel: 'Home',
+          tabBarLabelStyle: styles.label,
+          tabBarIcon: ({focused}) => (
+            <Icon
+              name="home-outline"
+              color={focused ? '#444444' : '#858585'}
+              size={focused ? 40 : styles.icons.size}
+            />
+          ),
+          headerStyle: {
+            height: 80,
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Search"
+        component={Search}
+        options={{
+          tabBarLabel: 'Search',
+          tabBarLabelStyle: styles.label,
+          tabBarIcon: ({focused}) => (
+            <Icon
+              name="magnify"
+              color={focused ? '#444444' : '#858585'}
+              size={focused ? 40 : styles.icons.size}
+            />
+          ),
+          headerStyle: {
+            height: 80,
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Favorites"
+        component={Favorites}
+        options={{
           tabBarLabel: 'Favorites',
-          tabBarIcon: ({ color, size }) => (
-            <Icon name="heart-outline" color={color} size={size} />
-          )
-        }}/>
-      
-      <Tab.Screen name="Menu" component={Menu} 
-       options={{
-        tabBarLabel: 'Menu',
-        tabBarIcon: ({ color, size }) => (
-          <Icon name="menu" color={color} size={size} />
-        ),
-        headerShown:false,
-      }}/>
+          tabBarLabelStyle: styles.label,
+          tabBarIcon: ({focused}) => (
+            <Icon
+              name="heart-outline"
+              color={focused ? '#444444' : '#858585'}
+              size={focused ? 40 : styles.icons.size}
+            />
+          ),
+          headerStyle: {
+            height: 80,
+          },
+        }}
+      />
+
+      <Tab.Screen
+        name="Menu"
+        component={Menu}
+        options={{
+          tabBarLabel: 'Menu',
+          tabBarLabelStyle: styles.labelInactive,
+          tabBarIcon: ({focused}) => (
+            <Icon
+              name="menu"
+              color={focused ? '#444444' : '#858585'}
+              size={focused ? 40 : styles.icons.size}
+            />
+          ),
+          headerShown: false,
+        }}
+      />
     </Tab.Navigator>
-  )
-  };
+  );
+};
 
 export default NavigationBar;
 
-function screenOptions(route,color){
-  let iconName;
-
-  switch(route.name){
-    case "home":
-      iconName = "compass-outline"
-      break;
-      default:
-        break;
-  }
-
-  return(
-    <Icon type="material-community" name={iconName} size={20} color={color}/>
-  )
-}
+const styles = StyleSheet.create({
+  icons: {
+    size: 35,
+    color: '#858585',
+  },
+  tabBarStyle: {
+    backgroundColor: '#FFFFFF',
+    height: 80,
+  },
+  labelInactive: {
+    fontSize: 13,
+    fontWeight: 'normal',
+  },
+  labelActive: {
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+});
