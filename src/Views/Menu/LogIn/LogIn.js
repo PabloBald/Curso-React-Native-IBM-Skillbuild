@@ -1,9 +1,9 @@
 import React from 'react';
 import {View, Text, StyleSheet, TextInput} from 'react-native';
 import 'react-native-gesture-handler';
-import LoginButton from '../../../components/LoginButton';
+import LogInButton from '../../../components/LogInButton';
 
-const Login = () => {
+const LogIn = () => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.textContainer}>
@@ -32,7 +32,7 @@ const Login = () => {
       </View>
 
       <View style={styles.loginContainer}>
-        <LoginButton title="Log in" />
+        <LogInButton title="Log in" />
       </View>
     </View>
   );
@@ -80,4 +80,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+export default LogIn;

@@ -1,8 +1,7 @@
-import {tSImportEqualsDeclaration} from '@babel/types';
 import React from 'react';
 import {View, Text, StyleSheet, TextInput} from 'react-native';
 import 'react-native-gesture-handler';
-import LoginButtom from '../../../components/LoginButton';
+import LogInButton from '../../../components/LogInButton';
 
 const SignUp = () => {
   return (
