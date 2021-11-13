@@ -41,7 +41,7 @@ const SignUp = () => {
       </View>
 
       <View style={styles.loginContainer}>
-        <LoginButtom style={styles.button} title="Sign Up" />
+        <LogInButton style={styles.button} title="Sign Up" />
       </View>
     </View>
   );

@@ -42,7 +42,7 @@ const Menu = () => {
       />
 
       <Stack.Screen
-        name="login"
+        name="LogIn"
         component={LogIn}
         options={{
           title: 'Log in',
