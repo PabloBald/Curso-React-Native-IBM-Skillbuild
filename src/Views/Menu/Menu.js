@@ -20,7 +20,12 @@ const Menu = () => {
         options={{
           title: 'Menu',
           header: () => (
-            <CustomHeader height={80} color="#000000" fontSize={20} />
+            <CustomHeader
+              height={80}
+              color="#000000"
+              fontSize={20}
+              title="Menu"
+            />
           ),
         }}
       />
