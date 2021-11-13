@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 
-const CustomHeader = ({height, fontSize, color}) => {
+const CustomHeader = ({height, fontSize, color, title}) => {
   return (
     <View
       style={{
@@ -12,7 +12,7 @@ const CustomHeader = ({height, fontSize, color}) => {
         backgroundColor: '#ffffff',
       }}>
       <Text style={{fontSize: fontSize, color: color, fontWeight: '500'}}>
-        Menu
+        {title}
       </Text>
     </View>
   );
