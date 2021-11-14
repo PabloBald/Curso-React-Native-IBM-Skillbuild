@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {StyleSheet, TouchableOpacity, Text} from 'react-native';
 
 const CustomButton = ({onPress, title}) => (
@@ -13,8 +14,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderRadius: 10,
     paddingVertical: 12,
-    paddingHorizontal: 12,
-    width: 180,
     borderStyle: 'solid',
     borderColor: '#858585',
     borderWidth: 1,
@@ -28,5 +27,10 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
 });
+
+CustomButton.protoTypes = {
+  onPress: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+};
 
 export default CustomButton;

@@ -18,15 +18,7 @@ const Menu = () => {
         name="menu"
         component={MenuHome}
         options={{
-          title: 'Menu',
-          header: () => (
-            <CustomHeader
-              height={80}
-              color="#000000"
-              fontSize={20}
-              title="Menu"
-            />
-          ),
+         headerShown: false
         }}
       />
 

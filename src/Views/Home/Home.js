@@ -13,15 +13,7 @@ const Home = () => {
         name="main"
         component={Main}
         options={{
-          title: 'Main',
-          header: () => (
-            <CustomHeader
-              height={80}
-              color="#000000"
-              fontSize={20}
-              title="Main"
-            />
-          ),
+          headerShown: false
         }}
       />
     </Stack.Navigator>

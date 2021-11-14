@@ -37,7 +37,7 @@ const NavigationBar = props => {
         options={{
           tabBarActiveTintColor: '#444444',
           tabBarInactiveTintColor: '#858585',
-          tabBarLabel: 'Home',
+          tabBarShowLabel: false,
           tabBarLabelStyle: styles.label,
           tabBarIcon: ({focused}) => (
             <Icon
@@ -53,8 +53,8 @@ const NavigationBar = props => {
         name="Search"
         component={Search}
         options={{
-          tabBarLabel: 'Search',
           tabBarLabelStyle: styles.label,
+          tabBarShowLabel: false,
           tabBarIcon: ({focused}) => (
             <Icon
               name="magnify"
@@ -68,8 +68,8 @@ const NavigationBar = props => {
         name="Favorites"
         component={Favorites}
         options={{
-          tabBarLabel: 'Favorites',
           tabBarLabelStyle: styles.label,
+          tabBarShowLabel: false,
           tabBarIcon: ({focused}) => (
             <Icon
               name="heart-outline"
@@ -87,8 +87,8 @@ const NavigationBar = props => {
         name="Menu"
         component={Menu}
         options={{
-          tabBarLabel: 'Menu',
           tabBarLabelStyle: styles.labelInactive,
+          tabBarShowLabel: false,
           tabBarIcon: ({focused}) => (
             <Icon
               name="menu"
