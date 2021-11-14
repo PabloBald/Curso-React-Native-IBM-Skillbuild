@@ -2,6 +2,7 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import 'react-native-gesture-handler';
 import Main from './Main/Main';
+import NextForecast from './NextForecast/NextForecast';
 import CustomHeader from '../../components/Header/CustomHeader';
 
 const Stack = createNativeStackNavigator();
@@ -22,6 +23,13 @@ const Home = () => {
               title="Main"
             />
           ),
+        }}
+      />
+      <Stack.Screen
+        name="nextForecast"
+        component={NextForecast}
+        options={{
+          title: 'Pronóstico extendido',
         }}
       />
     </Stack.Navigator>

@@ -30,7 +30,7 @@ const MenuHome = ({navigation}) => {
           title="Sign up"
         />
         <CustomButtom
-          onPress={() => navigation.navigate('logIn')}
+          onPress={() => navigation.navigate('LogIn')}
           title="Log in"
         />
       </View>

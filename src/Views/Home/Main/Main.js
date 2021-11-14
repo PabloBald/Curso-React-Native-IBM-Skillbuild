@@ -1,8 +1,10 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import CustomButton from '../../../components/CustomButton';
+import 'react-native-gesture-handler';
 
-const Main = () => {
+const Main = ({navigation}) => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.top}>
@@ -25,6 +27,13 @@ const Main = () => {
         />
       </View>
       <View style={styles.card}></View>
+      <View style={styles.btnContainer}>
+      <CustomButton
+          onPress={() => navigation.navigate('nextForecast')}
+          title="Extendido"
+          style={styles.btn}
+        />
+      </View>
     </View>
   );
 };
@@ -54,5 +63,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 40,
     marginVertical: 50,
   },
+  btnContainer: {
+    flex: 1,
+    alignItems: 'center'
+  },
+  btn:{
+    
+  }
 });
 export default Main;
