@@ -4,7 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Menu from '../../Views/Menu/Menu';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Home from '../../Views/Home/Home';
-import Search from '../../Views/Search/index';
+import Search from '../../Views/Search/Search';
 
 function Favorites() {
   return (

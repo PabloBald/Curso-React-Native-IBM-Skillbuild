@@ -1,9 +1,13 @@
 import {SC} from './styles';
 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, Image, Alert} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import axios from 'axios';
+
+import storage from '../../../data/storage';
+import {env} from '../../../../.rnenv.js';
 
 const renderItem = ({item}) => {
   return (
@@ -16,6 +20,8 @@ const renderItem = ({item}) => {
 };
 
 const Main = () => {
+  const [currentLocation, setCurrentLocation] = useState({});
+  const [weatherData, setWeatherData] = useState({});
   const [saved, setSaved] = useState(false);
   const [data, setData] = useState({
     currentLocation: 'Berazategui',
@@ -67,6 +73,35 @@ const Main = () => {
       },
     ],
   });
+
+  useEffect(() => {
+    storage
+      .load({
+        key: 'currentSearch',
+        autoSync: true,
+        syncInBackground: true,
+      })
+      .then(data => {
+        console.log(1.1, data);
+        setCurrentLocation(data);
+
+        console.log(2);
+        const stop = false;
+
+        const location = currentLocation.replaceAll(' ', '%20');
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${env.OPENWEATHER_KEY}&units=metric`;
+
+        console.log(2.1);
+        axios
+          .get(url)
+          .then(data => console.log(data))
+          .catch(err => console.log('err', err));
+      })
+      .catch(err => {
+        console.warn('error');
+        console.warn(err.message);
+      });
+  }, [currentLocation]);
 
   const handleSaved = () => {
     setSaved(!saved);

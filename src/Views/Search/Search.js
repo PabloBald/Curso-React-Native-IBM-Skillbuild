@@ -13,8 +13,6 @@ const Search = () => {
   const [searchHistory, setSearchHistory] = useState([]);
 
   useEffect(() => {
-    console.log(1);
-
     storage
       .load({
         key: 'searchHistory',
@@ -22,18 +20,18 @@ const Search = () => {
         syncInBackground: true,
       })
       .then(data => {
-        console.log(1.1, data);
+        //console.log(1.1, data);
         setSearchHistory(data);
       })
       .catch(err => {
         console.warn('error');
         console.warn(err.message);
+        console.log('El historia sera un array vacio');
       });
-    //storage.remove({key: 'searchHistory'});
   }, [searchHistory]);
 
   const onChangeSearch = data => {
-    console.log(2, data);
+    //console.log(2, data);
     setSearchLocation(data.description);
 
     const history = [data.description, ...searchHistory].slice(0, 4);
@@ -44,7 +42,7 @@ const Search = () => {
 
     storage.save({
       key: 'currentSearch',
-      data: searchLocation,
+      data: data.description,
     });
 
     setSearchHistory(history);
