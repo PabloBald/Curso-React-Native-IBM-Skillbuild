@@ -1,3 +1,5 @@
+import {SC} from './styles';
+
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, Image, Alert} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
@@ -5,10 +7,10 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const renderItem = ({item}) => {
   return (
-    <View style={styles.renderItem}>
-      <Text style={styles.renderItem__hour}>{item.hour}hs</Text>
-      <Image style={styles.renderItem__icon} source={item.icon} />
-      <Text style={styles.renderItem__temp}>{item.temp}</Text>
+    <View style={SC.renderItem}>
+      <Text style={SC.renderItem__hour}>{item.hour}hs</Text>
+      <Image style={SC.renderItem__icon} source={item.icon} />
+      <Text style={SC.renderItem__temp}>{item.temp}</Text>
     </View>
   );
 };
@@ -70,8 +72,8 @@ const Main = () => {
     setSaved(!saved);
   };
   return (
-    <View style={styles.mainContainer}>
-      <View style={styles.top}>
+    <View style={SC.mainContainer}>
+      <View style={SC.top}>
         <View>
           <View style={{fontSize: 14}}>
             <Text>Current Location</Text>
@@ -82,7 +84,7 @@ const Main = () => {
             </Text>
           </View>
         </View>
-        <View style={styles.top__fav_icon}>
+        <View style={SC.top__fav_icon}>
           <Icon
             name={saved ? 'heart' : 'heart-outline'}
             size={24}
@@ -91,15 +93,15 @@ const Main = () => {
           {saved ? <Text>Saved!</Text> : null}
         </View>
       </View>
-      <View style={styles.weatherIcon}>
+      <View style={SC.weatherIcon}>
         <Image
           source={require('../../../assets/imgs/Main/WeatherIcon.png')}
           resizeMode="contain"
         />
       </View>
-      <View style={styles.card}>
-        <View style={styles.card__top}>
-          <View style={styles.card__top_currentTemp}>
+      <View style={SC.card}>
+        <View style={SC.card__top}>
+          <View style={SC.card__top_currentTemp}>
             <Text style={{color: '#858585', fontSize: 12}}>
               Current temperature
             </Text>
@@ -107,10 +109,10 @@ const Main = () => {
               {data.currentTemp}º
             </Text>
           </View>
-          <View style={styles.card__top_maxMin}>
+          <View style={SC.card__top_maxMin}>
             <View>
               <View>
-                <Text style={styles.card__title}>Max</Text>
+                <Text style={SC.card__title}>Max</Text>
               </View>
               <View>
                 <Text
@@ -132,9 +134,9 @@ const Main = () => {
             </View>
           </View>
         </View>
-        <View style={styles.card__bottom}>
+        <View style={SC.card__bottom}>
           <View>
-            <Text style={styles.card__title}>Today October 20</Text>
+            <Text style={SC.card__title}>Today October 20</Text>
           </View>
           <View>
             <FlatList
@@ -150,62 +152,4 @@ const Main = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  mainContainer: {
-    flex: 1,
-  },
-  top: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginHorizontal: 40,
-    marginTop: 20,
-  },
-  top__fav_icon: {
-    width: 50,
-    alignItems: 'center',
-  },
-  weatherIcon: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  card: {
-    flex: 3,
-    backgroundColor: '#C4C4C4',
-    width: 310,
-    height: 330,
-    borderRadius: 16,
-    marginHorizontal: 40,
-    marginVertical: 50,
-    paddingHorizontal: 15,
-  },
-  card__title: {
-    color: '#858585',
-    fontSize: 12,
-  },
-  card__top: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginVertical: 15,
-  },
-
-  renderItem: {
-    marginRight: 20,
-    marginVertical: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  renderItem__hour: {
-    color: '#858585',
-  },
-  renderItem__icon: {
-    marginVertical: 5,
-  },
-  renderItem__temp: {
-    color: '#858585',
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
-});
 export default Main;

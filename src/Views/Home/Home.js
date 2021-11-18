@@ -13,7 +13,7 @@ const Home = () => {
         name="main"
         component={Main}
         options={{
-          headerShown: false
+          headerShown: false,
         }}
       />
     </Stack.Navigator>
