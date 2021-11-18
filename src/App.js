@@ -5,7 +5,8 @@ import NavigationBar from './components/NavigationBar/NavigationBar';
 const App = () => {
   return (
     <NavigationContainer>
-      <NavigationBar />
+      <NavigationBar /> 
+      <CustomHeader />
     </NavigationContainer>
   );
 };
