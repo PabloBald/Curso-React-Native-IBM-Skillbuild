@@ -25,7 +25,7 @@ const NextForecastCard = ({day}) => {
         case 5: nameOfDay = 'Viernes';   break;
         case 6: nameOfDay = 'Sábado';    break;
       }
-    console.log(nameOfDay);
+    // console.log(nameOfDay);
     setCardDay(nameOfDay);
 
   }, []);

@@ -3,10 +3,11 @@ import React from 'react';
 import styles from './styles';
 
 /**
- * Recibe altura?, tamaño de fuente?, color?, título.
- * PARA MÍ VA SOLO TÍTULO
+ * 
+ * @param {String}
+ * @returns {JSX.Element}
  */
- export default CustomHeader = ({height, fontSize, color, title}) => {
+ const CustomHeader = ({height, fontSize, color, title}) => {
   return (
     <View style={[styles.container, {height: height}]}>
       <Text style={[styles.text, {fontSize: fontSize, color: color}]}>
@@ -15,3 +16,5 @@ import styles from './styles';
     </View>
   );
 };
+
+export default CustomHeader;

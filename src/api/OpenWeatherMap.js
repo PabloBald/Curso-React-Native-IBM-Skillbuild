@@ -1,6 +1,6 @@
 //@ts-check
-const REACT_API_KEY = 'd5f30228ad74068cb6f21617826651f6';
-const urlBase = `http://api.openweathermap.org/data/2.5/weather?appid=${REACT_API_KEY}&units=metric`;
+import { env } from "../../.rnenv.js";
+const urlBase = `http://api.openweathermap.org/data/2.5/weather?appid=${env.OPENWEATHER_KEY}&units=metric`;
 
 /**
  * getWeather
@@ -15,7 +15,7 @@ const getWeather = {
   withCityID: async id => {
     try {
       const response = await fetch(`${urlBase}&id=${id}`);
-      const result = await response.json();
+      const result   = await response.json();
       return result;
     } catch (error) {
       return error;
@@ -30,7 +30,7 @@ const getWeather = {
   withCityName: async (cityName, countryCode) => {
     try {
       const response = await fetch(`${urlBase}&q=${cityName},${countryCode}`);
-      const result = await response.json();
+      const result   = await response.json();
       return result;
     } catch (error) {
       return error;
@@ -45,7 +45,7 @@ const getWeather = {
   withCoordinates: async (latitude, longitude) => {
     try {
       const response = await fetch( `${urlBase}&lat=${latitude}&lon=${longitude}`);
-      const result = await response.json();
+      const result   = await response.json();
       return result;
     } catch (error) {
       return error;
