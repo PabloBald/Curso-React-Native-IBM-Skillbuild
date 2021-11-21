@@ -77,31 +77,19 @@ const Main = () => {
   useEffect(() => {
     storage
       .load({
-        key: 'currentSearch',
+        key: 'lastSearchData',
         autoSync: true,
         syncInBackground: true,
       })
       .then(data => {
         console.log(1.1, data);
-        setCurrentLocation(data);
 
-        console.log(2);
-        const stop = false;
-
-        const location = currentLocation.replaceAll(' ', '%20');
-        const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${env.OPENWEATHER_KEY}&units=metric`;
-
-        console.log(2.1);
-        axios
-          .get(url)
-          .then(data => console.log(data))
-          .catch(err => console.log('err', err));
       })
       .catch(err => {
         console.warn('error');
         console.warn(err.message);
       });
-  }, [currentLocation]);
+  }, []);
 
   const handleSaved = () => {
     setSaved(!saved);
