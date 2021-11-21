@@ -1,6 +1,7 @@
 //@ts-check
-import { env } from "../../.rnenv.js";
-const urlBase = `http://api.openweathermap.org/data/2.5/weather?appid=${env.OPENWEATHER_KEY}&units=metric`;
+import {env} from '../../.rnenv.js';
+const urlBaseCurrent = `http://api.openweathermap.org/data/2.5/weather?appid=${env.OPENWEATHER_KEY}&units=metric`;
+const urlOneCall = `https://api.openweathermap.org/data/2.5/onecall?appid=${env.OPENWEATHER_KEY}&units=metric`;
 
 /**
  * getWeather
@@ -14,8 +15,8 @@ const getWeather = {
    */
   withCityID: async id => {
     try {
-      const response = await fetch(`${urlBase}&id=${id}`);
-      const result   = await response.json();
+      const response = await fetch(`${urlBaseCurrent}&id=${id}`);
+      const result = await response.json();
       return result;
     } catch (error) {
       return error;
@@ -29,8 +30,10 @@ const getWeather = {
    */
   withCityName: async (cityName, countryCode) => {
     try {
-      const response = await fetch(`${urlBase}&q=${cityName},${countryCode}`);
-      const result   = await response.json();
+      const response = await fetch(
+        `${urlBaseCurrent}&q=${cityName},${countryCode}`,
+      );
+      const result = await response.json();
       return result;
     } catch (error) {
       return error;
@@ -40,13 +43,21 @@ const getWeather = {
    * withCoordinates (latitude, longitude)
    * @param {string} latitude,
    * @param {string} longitude
-   * @returns {Promise<JSON>}
+   *
    */
   withCoordinates: async (latitude, longitude) => {
     try {
-      const response = await fetch( `${urlBase}&lat=${latitude}&lon=${longitude}`);
-      const result   = await response.json();
-      return result;
+      const responseBase = await fetch(
+        `${urlBaseCurrent}&lat=${latitude}&lon=${longitude}`,
+      );
+      const resultBase = await responseBase.json();
+
+      const responseOne = await fetch(
+        `${urlOneCall}&lat=${latitude}&lon=${longitude}`,
+      );
+      const resultOne = await responseOne.json();
+
+      return [responseBase, responseOne];
     } catch (error) {
       return error;
     }
