@@ -57,7 +57,7 @@ const getWeather = {
       );
       const resultOne = await responseOne.json();
 
-      return [responseBase, responseOne];
+      return [resultBase, resultOne];
     } catch (error) {
       return error;
     }

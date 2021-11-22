@@ -10,7 +10,18 @@ import useCheckLocationPermissions from '../../../hooks/useCheckLocationPermissi
 import Geolocation from 'react-native-geolocation-service';
 import getWeather from '../../../api/OpenWeatherMap';
 
+const renderItem = ({item}) => {
+  return (
+    <View style={styles.renderItem}>
+      <Text style={styles.renderItem__hour}>{item.hour}hs</Text>
+      <Image style={styles.renderItem__icon} source={item.icon} />
+      <Text style={styles.renderItem__temp}>{item.temp}</Text>
+    </View>
+  );
+};
+
 export default Main = ({navigation}) => {
+  const [saved, setSaved] = useState(false);
   const [loading, setLoading] = useState(true);
   const [permissionStatus] = useCheckLocationPermissions();
   const [location, setLocation] = useState(null);
@@ -39,6 +50,8 @@ export default Main = ({navigation}) => {
   }, []);
 
   useEffect(() => {
+    if (location && weather?.length > 0) setLoading(false);
+
     const loadWeather = async () => {
       const data = await getWeather.withCoordinates(
         location.latitude,
@@ -47,14 +60,19 @@ export default Main = ({navigation}) => {
       setWeather(data);
     };
     loadWeather();
+  }, [location, loading]);
 
-    if (location && weather) setLoading(false);
-  }, [location]);
+  const handleSaved = () => {
+    setSaved(!saved);
+  };
 
   return (
     <>
+      {console.log('weather main', weather)}
       {loading ? (
-        <Text>Cargando</Text>
+        <>
+          <Text>Cargando</Text>
+        </>
       ) : (
         <>
           <View style={styles.mainContainer}>
@@ -65,7 +83,7 @@ export default Main = ({navigation}) => {
                 </View>
                 <View>
                   <Text style={{fontWeight: 'bold', fontSize: 24}}>
-                    {data.name}
+                    {weather[0].name}
                   </Text>
                 </View>
               </View>
@@ -80,7 +98,9 @@ export default Main = ({navigation}) => {
             </View>
             <View style={styles.weatherIcon}>
               <Image
-                source={require('../../../assets/images/weatherIcons/sunny.png')}
+                source={{
+                  uri: `https://openweathermap.org/img/wn/${weather[0].weather[0].icon}@2x.png`,
+                }}
                 resizeMode="contain"
               />
             </View>
@@ -96,7 +116,7 @@ export default Main = ({navigation}) => {
                       fontWeight: 'bold',
                       color: '#858585',
                     }}>
-                    {data.main.temp}º
+                    {weather[0].main.temp}º
                   </Text>
                 </View>
                 <View style={styles.card__top_maxMin}>
@@ -111,7 +131,7 @@ export default Main = ({navigation}) => {
                           fontSize: 14,
                           fontWeight: 'bold',
                         }}>
-                        {data.main.temp_max}
+                        {weather[0].main.temp_max}
                       </Text>
                     </View>
                   </View>
@@ -126,7 +146,7 @@ export default Main = ({navigation}) => {
                           fontSize: 14,
                           fontWeight: 'bold',
                         }}>
-                        {data.main.temp_min}
+                        {weather[0].main.temp_min}
                       </Text>
                     </View>
                   </View>
@@ -138,7 +158,7 @@ export default Main = ({navigation}) => {
                 </View>
                 <View>
                   <FlatList
-                    data={data.perHour}
+                    data={weather[0].perHour}
                     renderItem={renderItem}
                     keyExtractor={item => item.id}
                     horizontal
@@ -148,7 +168,12 @@ export default Main = ({navigation}) => {
             </View>
             <View style={styles.btnContainer}>
               <CustomButton
-                onPress={() => navigation.navigate('NextForecast')}
+                onPress={() =>
+                  navigation.navigate('NextForecast', {
+                    id: 123,
+                    weather: weather,
+                  })
+                }
                 title="Extendido"
                 style={styles.btn}
               />
