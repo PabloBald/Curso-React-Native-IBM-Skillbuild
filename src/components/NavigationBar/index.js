@@ -19,11 +19,7 @@ export default NavigationBar = () => {
         name="Home"
         component={Home}
         options={{
-          tabBarActiveTintColor: '#444444',
-          tabBarInactiveTintColor: '#858585',
-          // tabBarLabel: "Inicio",
           tabBarShowLabel: false,
-          tabBarLabelStyle: styles.label,
           tabBarIcon: ({focused}) => (
             <Icon
               name="home-outline"
@@ -35,10 +31,9 @@ export default NavigationBar = () => {
         }}
       />
       <Tab.Screen
-        name="Search"
+        name="Buscar ciudad"
         component={Search}
         options={{
-          tabBarLabelStyle: styles.label,
           tabBarShowLabel: false,
           tabBarIcon: ({focused}) => (
             <Icon
@@ -47,13 +42,13 @@ export default NavigationBar = () => {
               size={focused ? 40 : styles.icons.size}
             />
           ),
+          headerShown: false,
         }}
       />
       <Tab.Screen
-        name="Favorites"
+        name="Favoritos"
         component={Favorites}
         options={{
-          tabBarLabelStyle: styles.label,
           tabBarShowLabel: false,
           tabBarIcon: ({focused}) => (
             <Icon
@@ -62,17 +57,13 @@ export default NavigationBar = () => {
               size={focused ? 40 : styles.icons.size}
             />
           ),
-          headerStyle: {
-            height: 80,
-          },
+          headerShown: false,
         }}
       />
-
       <Tab.Screen
         name="Menu"
         component={Menu}
         options={{
-          tabBarLabelStyle: styles.labelInactive,
           tabBarShowLabel: false,
           tabBarIcon: ({focused}) => (
             <Icon
