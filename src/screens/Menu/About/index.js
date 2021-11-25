@@ -6,7 +6,6 @@ import {ScrollView} from 'react-native-gesture-handler';
 export default About = () => {
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.titulo}>Sobre la App</Text>
       <Text style={styles.texto}>
         Esta aplicacion busca resolver el principal problema de nuestro cliente
         Paula cuya necesidad era poder tener a la vista el clima de su locación
