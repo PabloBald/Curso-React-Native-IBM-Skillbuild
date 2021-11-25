@@ -1,7 +1,17 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
+import {
+  responsiveHeight,
+  responsiveWidth,
+  responsiveFontSize,
+} from 'react-native-responsive-dimensions';
 
 const styles = StyleSheet.create({
+  centered: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
   mainContainer: {
     flex: 1,
   },
@@ -10,14 +20,14 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: '7.10%',
+    marginTop: responsiveHeight(7.10),
   },
 
   top__current: {
     marginLeft: '10.25%',
   },
 
-  top__fav_icon: {
+  top__fav__icon: {
     alignItems: 'center',
     marginRight: '3%',
     marginTop: '2%',
@@ -25,8 +35,6 @@ const styles = StyleSheet.create({
   },
 
   weatherIcon: {
-    justifyContent: 'center',
-    alignItems: 'center',
     marginTop: '4.73%',
     maxHeight: '18.72%',
     overflow: 'hidden',
@@ -36,7 +44,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-
+  //TODO:
   card: {
     flex: 1,
     justifyContent: 'center',
@@ -48,18 +56,20 @@ const styles = StyleSheet.create({
     height: '80.48%',
     marginLeft: '10.25%',
     borderRadius: 16,
-  },
-
-  card__title: {
-    color: '#858585',
-    marginTop:'6.06%',
-    fontSize: 12,
+    padding: responsiveHeight(1.5),
   },
 
   card__top: {
+    backgroundColor:'green',
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // marginVertical: 15,
+  },
+  card__bottom: {flex: 1},
+  card__title: {
+    color: '#858585',
+    marginTop: '6.06%',
+    fontSize: responsiveFontSize(1.2),
   },
 
   renderItem: {
@@ -78,7 +88,15 @@ const styles = StyleSheet.create({
   renderItem__temp: {
     color: '#858585',
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: responsiveFontSize(1.8),
+  },
+  loading__container: {
+    flex: 1,
+    backgroundColor: 'green',
+  },
+  loading__text: {
+    fontSize: responsiveFontSize(10),
+    color: 'red',
   },
 });
 export default styles;
