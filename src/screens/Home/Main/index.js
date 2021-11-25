@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import styles from './styles';
-import { View, Text, Image } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import {View, Text, Image} from 'react-native';
+import {FlatList} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import CustomButton from '../../../components/CustomButton';
-import useCurrentCityWeather from '../../../hooks/useCurrentCityWeather';
-import useLocation from '../../../hooks/useLocation';
 import useCheckLocationPermissions from '../../../hooks/useCheckLocationPermissions';
 import Geolocation from 'react-native-geolocation-service';
 import getWeather from '../../../api/OpenWeatherMap';
-import { responsiveFontSize } from 'react-native-responsive-dimensions';
+import {responsiveFontSize} from 'react-native-responsive-dimensions';
+// import useWeatherIcon from '../../../hooks/useWeatherIcon';
 
-const renderItem = ({ item }) => {
+const renderItem = ({item}) => {
   return (
     <View style={styles.renderItem}>
       <Text style={styles.renderItem__hour}>{item.hour}hs</Text>
@@ -21,17 +20,18 @@ const renderItem = ({ item }) => {
   );
 };
 
-export default Main = ({ navigation }) => {
+export default Main = ({navigation}) => {
   const [saved, setSaved] = useState(false);
   const [loading, setLoading] = useState(true);
   const [permissionStatus] = useCheckLocationPermissions();
   const [location, setLocation] = useState(null);
   const [weather, setWeather] = useState(null);
+  // const [weatherIcon, setWeatherIcon] = useState({src: ''}); //FIXME:
 
   useEffect(() => {
     try {
       Geolocation.getCurrentPosition(
-        ({ coords }) => {
+        ({coords}) => {
           const currentCoors = {
             latitude: coords.latitude || '0.0',
             longitude: coords.longitude || '0.0',
@@ -39,16 +39,20 @@ export default Main = ({ navigation }) => {
           setLocation(currentCoors);
         },
         e => console.error(e),
-        { enableHighAccuracy: true },
+        {enableHighAccuracy: true},
       );
     } catch (e) {
       return (
-        <View style={{ flex: 1 }}>
+        <View style={{flex: 1}}>
           <Text>{e.message}</Text>
         </View>
       );
     }
   }, []);
+  //FIXME:  
+  // useEffect(() => {
+  //   // setWeatherIcon(useWeatherIcon(weather[0].weather[0].icon));
+  // }, [weather]);
 
   useEffect(() => {
     if (location && weather?.length > 0) setLoading(false);
@@ -59,6 +63,7 @@ export default Main = ({ navigation }) => {
         location.longitude,
       );
       setWeather(data);
+      // setWeatherIcon(useWeatherIcon(data[0].weather[0].icon));
     };
     loadWeather();
   }, [location, loading]);
@@ -69,7 +74,6 @@ export default Main = ({ navigation }) => {
 
   return (
     <>
-      {console.log('weather main', weather)}
       {loading && !weather ? (
         <View style={styles.loading__container}>
           <Text style={styles.loading__text}>Cargando</Text>
@@ -79,11 +83,15 @@ export default Main = ({ navigation }) => {
           <View style={styles.mainContainer}>
             <View style={styles.top}>
               <View style={styles.top__current}>
-                <View style={{ fontSize: responsiveFontSize(1.8) }}>
+                <View style={{fontSize: responsiveFontSize(1.8)}}>
                   <Text>Ubicación actual</Text>
                 </View>
                 <View>
-                  <Text style={{ fontWeight: 'bold', fontSize: responsiveFontSize(3.4), }}>
+                  <Text
+                    style={{
+                      fontWeight: 'bold',
+                      fontSize: responsiveFontSize(3.4),
+                    }}>
                     {weather[0].name}
                   </Text>
                 </View>
@@ -97,12 +105,13 @@ export default Main = ({ navigation }) => {
                 {saved ? <Text>Guardado!</Text> : null}
               </View>
             </View>
-            <View style={[styles.weatherIcon,styles.centered]}>
+            <View style={[styles.weatherIcon, styles.centered]}>
               <Image
                 style={styles.weatherIcon__icon}
                 source={{
                   uri: `https://openweathermap.org/img/wn/${weather[0].weather[0].icon}@2x.png`,
                 }}
+                // source={weatherIcon.src} //FIXME: Cambiar por ícono correcto
                 resizeMode="contain"
               />
             </View>
@@ -111,34 +120,65 @@ export default Main = ({ navigation }) => {
               <View style={[styles.card__content]}>
                 <View style={[styles.card__top]}>
                   <View style={styles.card__top__currentTemp}>
-                    <Text style={{ color: '#858585', fontSize: responsiveFontSize(1.8) }}>
+                    <Text
+                      style={{
+                        color: '#858585',
+                        fontSize: responsiveFontSize(1.8),
+                      }}>
                       Temperatura Actual
                     </Text>
-                    <Text style={{ fontSize: responsiveFontSize(7.2), fontWeight: 'bold', color: '#858585', }}>
-                      {weather[0].main.temp}º
+                    <Text
+                      style={{
+                        fontSize: responsiveFontSize(7.2),
+                        fontWeight: 'bold',
+                        color: '#858585',
+                      }}>
+                      {weather[0].main.temp.toFixed(1)}º
                     </Text>
                   </View>
                   <View style={styles.card__top_maxMin}>
                     <View>
                       <View>
-                        <Text style={styles.card__title}>Max</Text>
+                        <Text
+                          style={[
+                            styles.card__title,
+                            {
+                              color: '#858585',
+                              fontSize: responsiveFontSize(2.5),
+                            },
+                          ]}>
+                          Max
+                        </Text>
                       </View>
                       <View>
-                        <Text style={{ color: '#858585', fontSize: responsiveFontSize(1.6), fontWeight: 'bold',}}>
-                          {weather[0].main.temp_max}
+                        <Text
+                          style={{
+                            color: '#858585',
+                            fontSize: responsiveFontSize(3.6),
+                            fontWeight: 'bold',
+                          }}>
+                          {weather[0].main.temp_max.toFixed(1)}
                         </Text>
                       </View>
                     </View>
                     <View>
                       <View>
-                        <Text style={{ color: '#858585', fontSize: responsiveFontSize(1.4), }}>
+                        <Text
+                          style={{
+                            color: '#858585',
+                            fontSize: responsiveFontSize(2.5),
+                          }}>
                           Min
                         </Text>
                       </View>
                       <View>
                         <Text
-                          style={{ color: '#858585', fontSize: responsiveFontSize(1.6), fontWeight: 'bold' }}>
-                          {weather[0].main.temp_min}
+                          style={{
+                            color: '#858585',
+                            fontSize: responsiveFontSize(3.6),
+                            fontWeight: 'bold',
+                          }}>
+                          {weather[0].main.temp_min.toFixed(1)}
                         </Text>
                       </View>
                       {/* //FIXME: Buscar la rua correcta para generar las lista */}
@@ -174,7 +214,7 @@ export default Main = ({ navigation }) => {
                     weather: weather,
                   })
                 }
-                title="Extendido"
+                title="Pronóstico extendido"
                 style={styles.btn}
               />
             </View>
