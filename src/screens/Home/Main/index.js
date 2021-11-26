@@ -41,13 +41,15 @@ const renderItem = ({item}) => {
   );
 };
 
-export default Main = ({navigation}) => {
+export default Main = ({route, navigation}) => {
   const [saved, setSaved] = useState(false);
   const [loading, setLoading] = useState(true);
   const [permissionStatus] = useCheckLocationPermissions();
   const [location, setLocation] = useState(null);
   const [weather, setWeather] = useState(null);
   // const [weatherIcon, setWeatherIcon] = useState({src: ''}); //FIXME:
+
+  const searchedLocation = route.params?.searchData;
 
   useEffect(() => {
     try {
@@ -79,10 +81,18 @@ export default Main = ({navigation}) => {
     if (location && weather?.length > 0) setLoading(false);
 
     const loadWeather = async () => {
-      const data = await getWeather.withCoordinates(
-        location.latitude,
-        location.longitude,
-      );
+      const position = {
+        lat: location.latitude,
+        lon: location.longitude,
+      };
+
+      if (searchedLocation) {
+        console.log(112312312312312312312);
+        position.lat = searchedLocation.latitude;
+        position.lon = searchedLocation.longitude;
+      }
+
+      const data = await getWeather.withCoordinates(position.lat, position.lon);
       setWeather(data);
       console.log(data);
 
