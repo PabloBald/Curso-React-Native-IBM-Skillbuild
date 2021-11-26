@@ -8,7 +8,6 @@ import useCheckLocationPermissions from '../../../hooks/useCheckLocationPermissi
 import Geolocation from 'react-native-geolocation-service';
 import getWeather from '../../../api/OpenWeatherMap';
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
-// import useWeatherIcon from '../../../hooks/useWeatherIcon';
 
 function addZero(i) {
   if (i < 10) {
@@ -47,7 +46,6 @@ export default Main = ({route, navigation}) => {
   const [permissionStatus] = useCheckLocationPermissions();
   const [location, setLocation] = useState(null);
   const [weather, setWeather] = useState(null);
-  // const [weatherIcon, setWeatherIcon] = useState({src: ''}); //FIXME:
 
   const searchedLocation = route.params?.searchData;
 
@@ -72,10 +70,6 @@ export default Main = ({route, navigation}) => {
       );
     }
   }, []);
-  //FIXME:
-  // useEffect(() => {
-  //   // setWeatherIcon(useWeatherIcon(weather[0].weather[0].icon));
-  // }, [weather]);
 
   useEffect(() => {
     if (location && weather?.length > 0) setLoading(false);
@@ -95,8 +89,6 @@ export default Main = ({route, navigation}) => {
       const data = await getWeather.withCoordinates(position.lat, position.lon);
       setWeather(data);
       console.log(data);
-
-      // setWeatherIcon(useWeatherIcon(data[0].weather[0].icon));
     };
     loadWeather();
   }, [location, loading]);
@@ -214,13 +206,6 @@ export default Main = ({route, navigation}) => {
                           {weather[0].main.temp_min.toFixed(1)}
                         </Text>
                       </View>
-                      {/* //FIXME: Buscar la rua correcta para generar las lista */}
-                      {/* <FlatList
-                        data={weather[1].daily[0]}
-                        renderItem={renderItem}
-                        keyExtractor={item => item.id}
-                        horizontal
-                      /> */}
                     </View>
                   </View>
                 </View>
@@ -230,9 +215,9 @@ export default Main = ({route, navigation}) => {
                   </View>
                   <View>
                     <FlatList
-                      data={weather[1].hourly}
+                      data={weather[1].hourly.slice(1,24)}
                       renderItem={renderItem}
-                      keyExtractor={item => item.id}
+                      // keyExtractor={item => item.id}
                       horizontal
                     />
                   </View>
