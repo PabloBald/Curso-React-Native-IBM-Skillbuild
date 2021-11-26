@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: responsiveHeight(7.10),
+    marginTop: responsiveHeight(7.1),
   },
 
   top__current: {
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
 
   card__top: {
-    backgroundColor:'green',
+    backgroundColor: 'green',
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',

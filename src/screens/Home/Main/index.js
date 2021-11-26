@@ -10,12 +10,33 @@ import getWeather from '../../../api/OpenWeatherMap';
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
 // import useWeatherIcon from '../../../hooks/useWeatherIcon';
 
+function addZero(i) {
+  if (i < 10) {
+    i = '0' + i;
+  }
+  return i;
+}
+
 const renderItem = ({item}) => {
   return (
     <View style={styles.renderItem}>
-      <Text style={styles.renderItem__hour}>{item.hour}hs</Text>
-      <Image style={styles.renderItem__icon} source={item.icon} />
-      <Text style={styles.renderItem__temp}>{item.temp}</Text>
+      {
+        //Falta dar estilo y cambiar el path para usar las imagenes propias
+      }
+      <Image
+        style={styles.renderItem__icon}
+        source={{
+          uri: `http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`,
+          height: '25%',
+          width: '25%',
+        }}
+      />
+      <Text>{item.weather[0].description}</Text>
+      <Text style={styles.renderItem__temp}>{item.temp.toFixed()}º</Text>
+      <Text style={styles.renderItem__hour}>
+        {addZero(new Date(item.dt * 1000).getHours().toFixed(2))}
+        hs
+      </Text>
     </View>
   );
 };
@@ -49,7 +70,7 @@ export default Main = ({navigation}) => {
       );
     }
   }, []);
-  //FIXME:  
+  //FIXME:
   // useEffect(() => {
   //   // setWeatherIcon(useWeatherIcon(weather[0].weather[0].icon));
   // }, [weather]);
@@ -63,6 +84,8 @@ export default Main = ({navigation}) => {
         location.longitude,
       );
       setWeather(data);
+      console.log(data);
+
       // setWeatherIcon(useWeatherIcon(data[0].weather[0].icon));
     };
     loadWeather();
@@ -182,12 +205,12 @@ export default Main = ({navigation}) => {
                         </Text>
                       </View>
                       {/* //FIXME: Buscar la rua correcta para generar las lista */}
-                      <FlatList
-                        data={weather[1].daily[0].humidity}
+                      {/* <FlatList
+                        data={weather[1].daily[0]}
                         renderItem={renderItem}
                         keyExtractor={item => item.id}
                         horizontal
-                      />
+                      /> */}
                     </View>
                   </View>
                 </View>
@@ -197,7 +220,7 @@ export default Main = ({navigation}) => {
                   </View>
                   <View>
                     <FlatList
-                      data={weather[0].perHour}
+                      data={weather[1].hourly}
                       renderItem={renderItem}
                       keyExtractor={item => item.id}
                       horizontal
