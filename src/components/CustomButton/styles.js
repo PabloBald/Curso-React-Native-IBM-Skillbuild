@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   appButtonContainer: {
@@ -7,13 +7,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingVertical: 12,
     borderStyle: 'solid',
-    borderColor: '#858585',
+    borderColor: 'rgba(0,0,0,.5)',
     borderWidth: 1,
     height: 50,
   },
   appButtonText: {
     fontSize: 15,
-    color: '#858585',
+    color: 'rgba(0,0,0,.5)',
     fontWeight: 'bold',
     alignSelf: 'center',
     textTransform: 'uppercase',
