@@ -3,15 +3,15 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
   centered: {
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   icons: {
-    size: 33,
+    size: 28,
     color: '#858585',
   },
   tabBarStyle: {
     backgroundColor: '#FFFFFF',
-    height: '13.3%',
-  }
+    height: 50,
+  },
 });
 export default styles;

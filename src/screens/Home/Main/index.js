@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import styles from './styles';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, ScrollView, ImageBackground} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import CustomButton from '../../../components/CustomButton';
@@ -8,13 +8,10 @@ import useCheckLocationPermissions from '../../../hooks/useCheckLocationPermissi
 import Geolocation from 'react-native-geolocation-service';
 import getWeather from '../../../api/OpenWeatherMap';
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
+import BackgroundImage from '../../../components/BackgroundImage';
+import {Avatar} from 'react-native-paper';
 
-function addZero(i) {
-  if (i < 10) {
-    i = '0' + i;
-  }
-  return i;
-}
+import {unixToDate} from '../../../utils/unixToDate';
 
 const renderItem = ({item}) => {
   return (
@@ -30,12 +27,12 @@ const renderItem = ({item}) => {
           width: '25%',
         }}
       />
-      <Text>{item.weather[0].description}</Text>
-      <Text style={styles.renderItem__temp}>{item.temp.toFixed()}º</Text>
       <Text style={styles.renderItem__hour}>
-        {addZero(new Date(item.dt * 1000).getHours().toFixed(2))}
+        {unixToDate.getHours(item.dt)}
         hs
       </Text>
+      <Text style={{color: '#fff'}}>{item.weather[0].description}</Text>
+      <Text style={styles.renderItem__temp}>{item.temp.toFixed()}º</Text>
     </View>
   );
 };
@@ -81,14 +78,12 @@ export default Main = ({route, navigation}) => {
       };
 
       if (searchedLocation) {
-        console.log(112312312312312312312);
         position.lat = searchedLocation.latitude;
         position.lon = searchedLocation.longitude;
       }
 
       const data = await getWeather.withCoordinates(position.lat, position.lon);
       setWeather(data);
-      console.log(data);
     };
     loadWeather();
   }, [location, loading]);
@@ -104,19 +99,17 @@ export default Main = ({route, navigation}) => {
           <Text style={styles.loading__text}>Cargando</Text>
         </View>
       ) : (
-        <>
-          <View style={styles.mainContainer}>
+        <BackgroundImage>
+          <View style={styles.main}>
             <View style={styles.top}>
               <View style={styles.top__current}>
                 <View style={{fontSize: responsiveFontSize(1.8)}}>
-                  <Text>Ubicación actual</Text>
+                  <Text style={styles.top__current__text}>
+                    Ubicación actual
+                  </Text>
                 </View>
                 <View>
-                  <Text
-                    style={{
-                      fontWeight: 'bold',
-                      fontSize: responsiveFontSize(3.4),
-                    }}>
+                  <Text style={styles.top__current__title}>
                     {weather[0].name}
                   </Text>
                 </View>
@@ -125,19 +118,24 @@ export default Main = ({route, navigation}) => {
                 <Icon
                   name={saved ? 'heart' : 'heart-outline'}
                   size={24}
+                  color="#FFF"
                   onPress={handleSaved}
                 />
-                {saved ? <Text>Guardado!</Text> : null}
+                {saved ? (
+                  <Text styles={styles.top__fav__icon__text}>Guardado!</Text>
+                ) : null}
               </View>
             </View>
             <View style={[styles.weatherIcon, styles.centered]}>
-              <Image
-                style={styles.weatherIcon__icon}
+              <Avatar.Image
+                size={80}
                 source={{
-                  uri: `https://openweathermap.org/img/wn/${weather[0].weather[0].icon}@2x.png`,
+                  uri: `https://raw.githubusercontent.com/leandromuzzupappa/leandromuzzupappa.github.io/master/assets/images/${weather[0].weather[0].icon.replace(
+                    'n',
+                    'd',
+                  )}.png`,
                 }}
-                // source={weatherIcon.src} //FIXME: Cambiar por ícono correcto
-                resizeMode="contain"
+                style={{backgroundColor: 'rgba(0,0,0,0)'}}
               />
             </View>
             {/* //TODO: Terminar de acomodar contenido de la tarjeta. */}
@@ -147,7 +145,7 @@ export default Main = ({route, navigation}) => {
                   <View style={styles.card__top__currentTemp}>
                     <Text
                       style={{
-                        color: '#858585',
+                        color: '#fff',
                         fontSize: responsiveFontSize(1.8),
                       }}>
                       Temperatura Actual
@@ -156,7 +154,7 @@ export default Main = ({route, navigation}) => {
                       style={{
                         fontSize: responsiveFontSize(7.2),
                         fontWeight: 'bold',
-                        color: '#858585',
+                        color: '#fff',
                       }}>
                       {weather[0].main.temp.toFixed(1)}º
                     </Text>
@@ -168,8 +166,8 @@ export default Main = ({route, navigation}) => {
                           style={[
                             styles.card__title,
                             {
-                              color: '#858585',
-                              fontSize: responsiveFontSize(2.5),
+                              color: '#fff',
+                              fontSize: responsiveFontSize(2),
                             },
                           ]}>
                           Max
@@ -178,8 +176,8 @@ export default Main = ({route, navigation}) => {
                       <View>
                         <Text
                           style={{
-                            color: '#858585',
-                            fontSize: responsiveFontSize(3.6),
+                            color: '#fff',
+                            fontSize: responsiveFontSize(2.8),
                             fontWeight: 'bold',
                           }}>
                           {weather[0].main.temp_max.toFixed(1)}
@@ -190,8 +188,8 @@ export default Main = ({route, navigation}) => {
                       <View>
                         <Text
                           style={{
-                            color: '#858585',
-                            fontSize: responsiveFontSize(2.5),
+                            color: '#fff',
+                            fontSize: responsiveFontSize(2),
                           }}>
                           Min
                         </Text>
@@ -199,8 +197,8 @@ export default Main = ({route, navigation}) => {
                       <View>
                         <Text
                           style={{
-                            color: '#858585',
-                            fontSize: responsiveFontSize(3.6),
+                            color: '#fff',
+                            fontSize: responsiveFontSize(2.8),
                             fontWeight: 'bold',
                           }}>
                           {weather[0].main.temp_min.toFixed(1)}
@@ -215,7 +213,7 @@ export default Main = ({route, navigation}) => {
                   </View>
                   <View>
                     <FlatList
-                      data={weather[1].hourly.slice(1,24)}
+                      data={weather[1].hourly.slice(1, 24)}
                       renderItem={renderItem}
                       // keyExtractor={item => item.id}
                       horizontal
@@ -233,11 +231,11 @@ export default Main = ({route, navigation}) => {
                   })
                 }
                 title="Pronóstico extendido"
-                style={styles.btn}
+                style={{color: '#fff'}}
               />
             </View>
           </View>
-        </>
+        </BackgroundImage>
       )}
     </>
   );

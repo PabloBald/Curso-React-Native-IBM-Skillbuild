@@ -12,19 +12,26 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  mainContainer: {
+  main: {
     flex: 1,
+    padding: 16,
   },
 
   top: {
     alignSelf: 'stretch',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: responsiveHeight(7.1),
   },
 
-  top__current: {
-    marginLeft: '10.25%',
+  top__current__text: {
+    fontSize: responsiveFontSize(2),
+    color: 'white',
+  },
+
+  top__current__title: {
+    fontWeight: 'bold',
+    fontSize: responsiveFontSize(3.25),
+    color: 'white',
   },
 
   top__fav__icon: {
@@ -32,6 +39,10 @@ const styles = StyleSheet.create({
     marginRight: '3%',
     marginTop: '2%',
     width: 70,
+  },
+
+  top__fav__icon__text: {
+    color: '#fff',
   },
 
   weatherIcon: {
@@ -51,42 +62,39 @@ const styles = StyleSheet.create({
   },
 
   card__content: {
-    backgroundColor: '#C4C4C4',
-    width: '79.48%',
-    height: '80.48%',
-    marginLeft: '10.25%',
+    backgroundColor: 'rgba(0,0,0,.5)',
+    width: '100%',
+    height: '100%',
     borderRadius: 16,
-    padding: responsiveHeight(1.5),
+    //padding: responsiveHeight(1.5),
+    padding: 16,
   },
 
   card__top: {
-    backgroundColor: 'green',
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   card__bottom: {flex: 1},
   card__title: {
-    color: '#858585',
-    marginTop: '6.06%',
-    fontSize: responsiveFontSize(1.2),
+    color: '#fff',
+    fontSize: responsiveFontSize(2),
   },
 
   renderItem: {
-    // marginRight: 20,
+    width: 80,
     // marginVertical: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'yellow',
   },
   renderItem__hour: {
-    color: '#858585',
+    color: '#fff',
   },
   renderItem__icon: {
     // marginVertical: 5,
   },
   renderItem__temp: {
-    color: '#858585',
+    color: '#fff',
     fontWeight: 'bold',
     fontSize: responsiveFontSize(1.8),
   },
