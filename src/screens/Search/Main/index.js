@@ -60,7 +60,7 @@ const Search = ({navigation}) => {
   };
 
   const handlePressPredictivo = data => {
-    console.log(data);
+    // console.log(data);
 
     const searchData = {
       id: data.id,

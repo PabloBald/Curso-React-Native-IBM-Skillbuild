@@ -1,11 +1,39 @@
 // import styles from './styles';
-import React, { useState } from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, StyleSheet, TouchableHighlight} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import storage from '../../../data/storage';
+
+const DeleteCardButton = ({action}) => {
+  return (
+    <TouchableHighlight style={styles.card__delete} onPress={action}>
+      <View>
+        <Icon name="trash-can-outline" size={40} color="white" />
+      </View>
+    </TouchableHighlight>
+  );
+};
 
 //TODO: Terminar async del corazon antes de este screen
 export default Main = () => {
-  const [weather, setWeather] = useState(null);
+  const [userFavorites, setUserFavorites] = useState([]);
+
+  useEffect(() => {
+    storage
+        .load({key: 'userFavorites'})
+        .then(ret => setUserFavorites(ret))
+        .catch(err => {
+          // Creamos el storage como un arr vacio
+          storage.save({
+            key: 'userFavorites',
+            data: []
+          })
+        });
+  }, [userFavorites])
+
+  // const [weather, setWeather] = useState(null);
+  const [clicked, setClicked] = useState(false);
   const data = [
     {title: 'First Item'},
     {title: 'Second Item'},
@@ -14,14 +42,35 @@ export default Main = () => {
     {title: 'Third Item'},
   ];
 
+  const CardData = ({action}) => {
+    return (
+      <TouchableHighlight onPress={action}>
+        <View style={styles.card__data}>
+          <View style={styles.card__data_top}>
+            <Text>Icono</Text>
+            <Text style={{fontSize: 20}}>17º</Text>
+          </View>
+          <View style={styles.card__data_bottom}>
+            <View>
+              <Text>Max:</Text>
+            </View>
+            <View>
+              <Text>Min:</Text>
+            </View>
+          </View>
+        </View>
+      </TouchableHighlight>
+    );
+  };
+
   const renderItem = ({item}) => {
     return (
       <View style={styles.centered}>
         <View style={styles.card}>
           <View style={styles.card__title}>
-            <Text>MORENO --- {item.title}</Text>
+            <Text>{item.name}</Text>
           </View>
-          <View style={styles.card__data}>
+          {/* <View style={styles.card__data}>
             <View style={styles.card__data_top}>
               <Text>Icono</Text>
               <Text style={{fontSize: 20}}>17º</Text>
@@ -34,7 +83,12 @@ export default Main = () => {
                 <Text>Min:</Text>
               </View>
             </View>
-          </View>
+          </View> */}
+          {clicked ? (
+            <DeleteCardButton action={() => setClicked(!clicked)} />
+          ) : (
+            <CardData action={() => { setClicked(!clicked); }} />
+          )}
         </View>
       </View>
     );
@@ -42,8 +96,9 @@ export default Main = () => {
 
   return (
     <View style={styles.centered}>
+      {console.log('Estos son los favoritos del usuario', userFavorites)}
       <Text>Location Place Holder!</Text>
-      <FlatList data={data} renderItem={renderItem} />
+      <FlatList data={userFavorites} renderItem={renderItem} extraData={userFavorites}/>
     </View>
   );
 };
@@ -57,9 +112,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   card: {
-    // flexDirection: 'row',
+    flexDirection: 'row',
     backgroundColor: '#C4C4C4',
-    height: '100%',
+    minHeight: 100,
 
     minWidth: '100%',
     borderRadius: 15,

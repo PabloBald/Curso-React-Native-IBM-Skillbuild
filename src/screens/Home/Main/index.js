@@ -1,18 +1,18 @@
-import React, {useState, useEffect} from 'react';
-import styles from './styles';
-import {View, Text, Image} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {responsiveFontSize} from 'react-native-responsive-dimensions';
+import {View, Text, Image} from 'react-native';
 import CustomButton from '../../../components/CustomButton';
-import useCheckLocationPermissions from '../../../hooks/useCheckLocationPermissions';
 import Geolocation from 'react-native-geolocation-service';
 import getWeather from '../../../api/OpenWeatherMap';
-import {responsiveFontSize} from 'react-native-responsive-dimensions';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import React, {useState, useEffect} from 'react';
+import storage from '../../../data/storage';
+import styles from './styles';
+import useCheckLocationPermissions from '../../../hooks/useCheckLocationPermissions';
+import { Paragraph, Dialog, Portal } from 'react-native-paper';
 
 function addZero(i) {
-  if (i < 10) {
-    i = '0' + i;
-  }
+  if (i < 10) i = '0' + i;
   return i;
 }
 
@@ -46,8 +46,10 @@ export default Main = ({route, navigation}) => {
   const [permissionStatus] = useCheckLocationPermissions();
   const [location, setLocation] = useState(null);
   const [weather, setWeather] = useState(null);
+  const [savedLocation, setSavedLocation] = useState({});
 
   const searchedLocation = route.params?.searchData;
+  
 
   useEffect(() => {
     try {
@@ -81,21 +83,73 @@ export default Main = ({route, navigation}) => {
       };
 
       if (searchedLocation) {
-        console.log(112312312312312312312);
+        // console.log(112312312312312312312);
         position.lat = searchedLocation.latitude;
         position.lon = searchedLocation.longitude;
       }
 
       const data = await getWeather.withCoordinates(position.lat, position.lon);
       setWeather(data);
-      console.log(data);
+      // console.log(data);
     };
     loadWeather();
   }, [location, loading]);
 
   const handleSaved = () => {
-    setSaved(!saved);
+      setSaved(!saved);
+      setSavedLocation(weather);
   };
+
+  useEffect(() => {
+
+    if(saved) {
+      storage
+        .load({
+          key: 'userFavorites',
+        })
+        .then(ret => {
+
+          const userFavorites = ret;
+          const newFavorite = {
+            id: weather[0].id,
+            name: weather[0].name,
+            lat: weather[0].coord.lat,
+            lon: weather[0].coord.lon,
+          }
+
+    
+          // Si checkduplicates tiene elementos dentro
+          // retorno un mensaje diciendo que ya se habia
+          // guardado esta locacion
+
+          const checkDuplicates = userFavorites.filter( fav => fav.id === newFavorite.id );
+          if(checkDuplicates.length > 0) {
+            console.log('La locacion ya existe')
+            return;
+          }
+
+          // TODO buscar como hacerlo con includes
+          //console.log('INCLUDES', userFavorites.includes(newFavorite.id))
+          
+          storage.save({
+            key: 'userFavorites',
+            data: [newFavorite, ...userFavorites]
+          })
+          
+        })
+        .catch(err => {
+          
+          // Creamos el storage como un arr vacio
+          storage.save({
+            key: 'userFavorites',
+            data: []
+          })
+
+        });
+    }
+
+
+  }, [savedLocation])
 
   return (
     <>
@@ -215,7 +269,7 @@ export default Main = ({route, navigation}) => {
                   </View>
                   <View>
                     <FlatList
-                      data={weather[1].hourly.slice(1,24)}
+                      data={weather[1].hourly.slice(1, 24)}
                       renderItem={renderItem}
                       // keyExtractor={item => item.id}
                       horizontal
