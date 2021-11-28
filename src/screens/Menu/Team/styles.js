@@ -1,19 +1,19 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
-const styles= StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFF',
     padding: 20,
     fontFamily: 'Poppins',
   },
   card: {
-    backgroundColor: '#C4C4C4',
+    backgroundColor: '#fff',
     padding: 20,
     borderRadius: 10,
     maxWidth: 400,
     marginBottom: 30,
-    elevation: 3
+    elevation: 3,
   },
   card__top: {
     flexDirection: 'row',
@@ -26,19 +26,18 @@ const styles= StyleSheet.create({
     marginVertical: 10,
   },
   title: {
-    letterSpacing:1.5,
-    flexDirection:'column',
+    letterSpacing: 1.5,
+    flexDirection: 'column',
     fontFamily: 'Poppins',
     fontSize: 18,
     fontWeight: 'bold',
     color: '#858585',
-    
   },
-  subtitle:{
+  subtitle: {
     fontFamily: 'Poppins',
     fontSize: 15,
     color: '#858585',
-    fontStyle:'italic'
+    fontStyle: 'italic',
   },
   description: {
     fontFamily: 'Poppins',
