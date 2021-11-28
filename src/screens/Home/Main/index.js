@@ -11,6 +11,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import useCheckLocationPermissions from '../../../hooks/useCheckLocationPermissions';
 import BackgroundImage from '../../../components/BackgroundImage';
 import {Avatar} from 'react-native-paper';
+import Loading from '../../../components/Loading';
 
 import {unixToDate} from '../../../utils/unixToDate';
 
@@ -143,9 +144,7 @@ export default Main = ({route, navigation}) => {
   return (
     <>
       {loading && !weather ? (
-        <View style={styles.loading__container}>
-          <Text style={styles.loading__text}>Cargando</Text>
-        </View>
+        <Loading/>
       ) : (
         <BackgroundImage>
           <View style={styles.main}>
