@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import styles from './styles';
 import {View, Text, Image, ScrollView, ImageBackground} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
@@ -12,7 +12,7 @@ import useCheckLocationPermissions from '../../../hooks/useCheckLocationPermissi
 import BackgroundImage from '../../../components/BackgroundImage';
 import {Avatar} from 'react-native-paper';
 import Loading from '../../../components/Loading';
-
+import {favouritesContext} from '../../../context/favouriteContext';
 import {unixToDate} from '../../../utils/unixToDate';
 
 const renderItem = ({item}) => {
@@ -40,6 +40,7 @@ const renderItem = ({item}) => {
 };
 
 export default Main = ({route, navigation}) => {
+  const [favourites, setFavourites] = useContext(favouritesContext);
   const [saved, setSaved] = useState(false);
   const [loading, setLoading] = useState(true);
   const [permissionStatus] = useCheckLocationPermissions();
@@ -98,53 +99,45 @@ export default Main = ({route, navigation}) => {
 
   useEffect(() => {
     if (saved) {
-      storage
-        .load({
+      if (!favourites) {
+        console.log('No deberia de entrar aca pero entro');
+        storage.save({
           key: 'userFavorites',
-        })
-        .then(ret => {
-          const userFavorites = ret;
-          const newFavorite = {
-            id: weather[0].id,
-            name: weather[0].name,
-            lat: weather[0].coord.lat,
-            lon: weather[0].coord.lon,
-          };
-
-          // Si checkduplicates tiene elementos dentro
-          // retorno un mensaje diciendo que ya se habia
-          // guardado esta locacion
-
-          const checkDuplicates = userFavorites.filter(
-            fav => fav.id === newFavorite.id,
-          );
-          if (checkDuplicates.length > 0) {
-            console.log('La locacion ya existe');
-            return;
-          }
-
-          // TODO buscar como hacerlo con includes
-          //console.log('INCLUDES', userFavorites.includes(newFavorite.id))
-
-          storage.save({
-            key: 'userFavorites',
-            data: [newFavorite, ...userFavorites],
-          });
-        })
-        .catch(err => {
-          // Creamos el storage como un arr vacio
-          storage.save({
-            key: 'userFavorites',
-            data: [],
-          });
+          data: [],
         });
+
+        setFavourites([]);
+      }
+
+      const newFavorite = {
+        id: weather[0].id,
+        name: weather[0].name,
+        lat: weather[0].coord.lat,
+        lon: weather[0].coord.lon,
+      };
+
+      const checkDuplicates = favourites.filter(
+        fav => fav.id === newFavorite.id,
+      );
+
+      if (checkDuplicates.length > 0) {
+        console.log('La locacion ya existe');
+        return;
+      }
+
+      storage.save({
+        key: 'userFavorites',
+        data: [newFavorite, ...favourites],
+      });
+
+      setFavourites([newFavorite, ...favourites]);
     }
   }, [savedLocation]);
 
   return (
     <>
       {loading && !weather ? (
-        <Loading/>
+        <Loading />
       ) : (
         <BackgroundImage>
           <View style={styles.main}>
