@@ -22,11 +22,19 @@ const Location = data => {
   }, []);
 
   const cardPress = () => {
-    console.log('card pressed');
+    const searchData = {
+      id: id,
+      nombre: name,
+      pais: 'AR',
+      latitude: lat,
+      longitude: lon,
+    };
+
+    return data.selectItem(searchData);
   };
 
   const handleDelete = id => {
-    data.deleteItem(id);
+    return data.deleteItem(id);
   };
 
   return (
