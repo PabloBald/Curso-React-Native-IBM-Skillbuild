@@ -27,23 +27,12 @@ export default About = () => {
 
       <Text style={styles.texto}>
         <Text style={styles.subtitulo}>Favorites: </Text>Muestra las locaciones
-        guardadas donde podras acceder al clima de la misma o borrarla haciendo
-        swipe hacia la izquierda.
+        guardadas donde podras acceder al clima de la misma o borrarla.
       </Text>
 
       <Text style={styles.texto}>
         <Text style={styles.subtitulo}>Menu: </Text>Se encuentran links
-        referidos a la aplicación y el login o sign up del usuario.
-      </Text>
-
-      <Text style={styles.titulo}>Solucion UX</Text>
-      <Text style={styles.ultimoTexto}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. A beatae
-        dolorem rem odit alias architecto perferendis nisi asperiores, dolor
-        minus tempore error excepturi nemo soluta voluptas aperiam pariatur
-        voluptates. Eum. Commodi sequi temporibus, error id maiores quia
-        aspernatur nesciunt nam accusamus repellendus saepe expedita architecto
-        earum.
+        referidos a la aplicación.
       </Text>
     </ScrollView>
   );
