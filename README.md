@@ -1,25 +1,38 @@
-Instrucciones para correr el proyecto:
+## Instrucciones para correr el proyecto:
 
-Realizar la guia "Environment setup" con React Native CLI, en la plataforma correspondiente, de la documentación de el sitio de react-native.
+1.  Realizar la guia "Environment setup" con React Native CLI, en la plataforma correspondiente, de la documentación de el sitio de react-native.
 
-https://reactnative.dev/docs/environment-setup
+    https://reactnative.dev/docs/environment-setup
 
-Desde Git Bash clonar el repositorio del proyecto.
+2.  Desde Git Bash clonar el repositorio del proyecto.
 
-https://github.com/PabloBald/Curso-React-Native-IBM-Skillbuild.git
+        https://github.com/PabloBald/Curso-React-Native-IBM-Skillbuild.git
 
-Dentro de la carpeta del proyecto ejecutar los siguientes comandos:
+3.  Leer instrucciones del archivo .rnenv-example.js para generar la key utilizada por la API
 
-    -npm install / yarn install (según corresponda)
+4.  Dentro de la carpeta del proyecto ejecutar los siguientes comandos:
 
-Ejecutar el proyecto utilizando el comando:
+        npm install / yarn install (según corresponda)
 
-    -react-native run-android / run-ios (según corresponda)
+5.  Ejecutar el proyecto utilizando el comando:
+    react-native run-android / run-ios (según corresponda)
 
+---
 
------------------------------------------------------------------------------------------------------
+## Paper Prototyping
 
-Link a Persona Canva:
+---
 
-https://www.figma.com/file/sWZB3O2kKNNkf3C9q3227k/Paula---User-Persona?node-id=0%3A1
+## Persona Canvas de Paula:
 
+Para realizar el diseño utilizamos la herramienta figma
+
+<details><summary>Expandir/Contraer</summary>
+
+![Persona Canvas de Paula](src/assets/readme/Paula.svg)
+
+Puede descargar el pdf haciendo click [aquí](src/assets/readme/Paula.pdf)
+
+</details>
+
+---

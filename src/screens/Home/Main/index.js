@@ -14,6 +14,7 @@ import {Avatar} from 'react-native-paper';
 import Loading from '../../../components/Loading';
 
 import {unixToDate} from '../../../utils/unixToDate';
+import {currentDate} from '../../../utils/currentDate'
 
 const renderItem = ({item}) => {
   return (
@@ -251,7 +252,7 @@ export default Main = ({route, navigation}) => {
                 </View>
                 <View style={styles.card__bottom}>
                   <View>
-                    <Text style={styles.card__title}>Today October 20</Text>
+                    <Text style={styles.card__title}>{currentDate()}</Text>
                   </View>
                   <View>
                     <FlatList
