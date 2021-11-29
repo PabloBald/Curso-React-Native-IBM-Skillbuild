@@ -6,7 +6,7 @@ import Location from './Location';
 import storage from '../../../data/storage';
 import {favouritesContext} from '../../../context/favouriteContext';
 
-const Main = () => {
+const Main = ({navigation}) => {
   const [favourites, setFavourites] = useContext(favouritesContext);
 
   const handleDelete = id => {
@@ -19,6 +19,12 @@ const Main = () => {
     setFavourites(userFavoritesUpdated);
   };
 
+  const handleSelect = data => {
+    navigation.navigate('Main2', {
+      searchData: data,
+    });
+  };
+
   return (
     <ScrollView style={SC.container}>
       <Text style={SC.title}>Tus favoritos</Text>
@@ -28,7 +34,11 @@ const Main = () => {
         <FlatList
           data={favourites}
           renderItem={item => (
-            <Location data={item.item} deleteItem={id => handleDelete(id)} />
+            <Location
+              data={item.item}
+              deleteItem={id => handleDelete(id)}
+              selectItem={data => handleSelect(data)}
+            />
           )}
           keyExtractor={item => item.id}
         />
