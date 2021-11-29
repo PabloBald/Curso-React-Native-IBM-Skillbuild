@@ -28,7 +28,7 @@ El prototipo del diseño se hizo, en primera instancia a mano y luego se proyect
 
 ![menu](src/assets/readme/screens/menu.jpg) ![menu](src/assets/readme/screens/menu.jpg) ![search](src/assets/readme/screens/search.jpg)
 
-![team](src/assets/readme/screens/team.jpg)
+![team](src/assets/readme/screens/team.jpg) ![favorites](src/assets/readme/screens/favorites.jpg)
 
 
 </details>
