@@ -17,15 +17,27 @@
 5.  Ejecutar el proyecto utilizando el comando:
     react-native run-android / run-ios (según corresponda)
 
----
-
+----
 ## Paper Prototyping
 
----
+El prototipo del diseño se hizo, en primera instancia a mano y luego se proyecto con la herramienta [Figma](https://www.figma.com/)
+
+<details><summary>Expandir/Contraerw</summary>
+
+![about](src/assets/readme/screens/about.jpg) ![forecast](src/assets/readme/screens/forecast.jpg) ![home](src/assets/readme/screens/home.jpg)
+
+![menu](src/assets/readme/screens/menu.jpg) ![menu](src/assets/readme/screens/menu.jpg ![search](src/assets/readme/screens/search.jpg)
+
+![team](src/assets/readme/screens/team.jpg)
+
+
+</details>
+
+----
 
 ## Persona Canvas de Paula:
 
-Para realizar el diseño utilizamos la herramienta figma
+Para realizar el diseño utilizamos la herramienta [Figma](https://www.figma.com/)
 
 <details><summary>Expandir/Contraer</summary>
 
