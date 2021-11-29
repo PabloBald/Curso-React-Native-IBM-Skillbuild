@@ -1,8 +1,6 @@
+import {ImageBackground} from 'react-native';
 import {SC} from './styles';
 import React, {useState, useEffect} from 'react';
-import {ImageBackground} from 'react-native';
-
-import {unixToDate} from '../../utils/unixToDate';
 
 // Backgrounds
 /* 
@@ -13,12 +11,12 @@ import {unixToDate} from '../../utils/unixToDate';
   lateMorning -- 10 img || 10 t 11.59
   morning     -- 01 img || 06 t 11.59
 */
-import backgroundNight from '../../assets/images/background/solar-gradients-06.jpg';
+import backgroundAfternoon from '../../assets/images/background/solar-gradients-03.jpg';
 import backgroundDusk from '../../assets/images/background/solar-gradients-05.jpg';
 import backgroundEvening from '../../assets/images/background/solar-gradients-04.jpg';
-import backgroundAfternoon from '../../assets/images/background/solar-gradients-03.jpg';
 import backgroundLateMorning from '../../assets/images/background/solar-gradients-02.jpg';
 import backgroundMorning from '../../assets/images/background/solar-gradients-01.jpg';
+import backgroundNight from '../../assets/images/background/solar-gradients-06.jpg';
 
 const BackgroundImage = props => {
   const [background, setBackground] = useState('');
@@ -38,8 +36,7 @@ const BackgroundImage = props => {
     } else if (hours >= 18 && hours < 20) {
       setBackground(backgroundDusk);
     } else if (hours < 6 || hours >= 20) {
-      //setBackground(backgroundNight);
-      setBackground(backgroundMorning);
+      setBackground(backgroundNight);
     }
   }, []);
 
