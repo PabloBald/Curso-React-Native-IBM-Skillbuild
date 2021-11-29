@@ -1,7 +1,7 @@
 import {SC} from './styles';
 
 import React, {useState, useEffect} from 'react';
-import {View, Text, FlatList} from 'react-native';
+import {View, FlatList} from 'react-native';
 import storage from '../../../data/storage';
 
 import {Searchbar, List, Button} from 'react-native-paper';
@@ -36,7 +36,8 @@ const Search = ({navigation}) => {
         await fetch('https://apis.datos.gob.ar/georef/api/localidades?max=4142')
       ).json();
 
-      setCities([...prov.provincias, ...loc.localidades]);
+      // setCities([...prov.provincias, ...loc.localidades]);
+      setCities([...loc.localidades]);
     };
     aa();
   }, []);
@@ -103,8 +104,10 @@ const Search = ({navigation}) => {
           <FlatList
             data={filteredCities}
             renderItem={item => (
-              <Button onPress={() => handlePressPredictivo(item.item)}>
-                {item.item.nombre}
+              <Button  onPress={() => handlePressPredictivo(item.item)}>
+                <>
+                  {item.item.nombre}, {item.item.provincia.nombre}
+                </>
               </Button>
             )}
             keyExtractor={item => item.id}
