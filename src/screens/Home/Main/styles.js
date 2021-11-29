@@ -1,10 +1,6 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import {
-  responsiveHeight,
-  responsiveWidth,
-  responsiveFontSize,
-} from 'react-native-responsive-dimensions';
+import {responsiveFontSize} from 'react-native-responsive-dimensions';
 
 const styles = StyleSheet.create({
   centered: {
@@ -76,35 +72,37 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   card__bottom: {flex: 1},
+
   card__title: {
     color: '#fff',
     fontSize: responsiveFontSize(2),
   },
 
   renderItem: {
-    width: 80,
-    // marginVertical: 10,
+    width: 90,
+    marginVertical: 10,
+    borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
+    marginHorizontal: 2,
+    maxHeight: '85%',
+    textTransform: 'capitalize',
+    backgroundColor: 'rgba(173, 216, 230, 0.5)',
   },
+
   renderItem__hour: {
     color: '#fff',
   },
-  renderItem__icon: {
-    // marginVertical: 5,
+  renderItem__status: {
+    color: '#FFF',
+    textAlign: 'center',
+    textTransform: 'capitalize',
   },
+
   renderItem__temp: {
     color: '#fff',
     fontWeight: 'bold',
     fontSize: responsiveFontSize(1.8),
-  },
-  loading__container: {
-    flex: 1,
-    backgroundColor: 'green',
-  },
-  loading__text: {
-    fontSize: responsiveFontSize(10),
-    color: 'red',
   },
 });
 export default styles;

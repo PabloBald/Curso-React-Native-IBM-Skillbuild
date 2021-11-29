@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import styles from './styles';
-import {View, Text, Image, ScrollView, ImageBackground} from 'react-native';
+import {View, Text, Image} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
 import CustomButton from '../../../components/CustomButton';
@@ -18,9 +18,6 @@ import {unixToDate} from '../../../utils/unixToDate';
 const renderItem = ({item}) => {
   return (
     <View style={styles.renderItem}>
-      {
-        //Falta dar estilo y cambiar el path para usar las imagenes propias
-      }
       <Image
         style={styles.renderItem__icon}
         source={{
@@ -33,8 +30,8 @@ const renderItem = ({item}) => {
         {unixToDate.getHours(item.dt)}
         hs
       </Text>
-      <Text style={{color: '#fff'}}>{item.weather[0].description}</Text>
-      <Text style={styles.renderItem__temp}>{item.temp.toFixed()}º</Text>
+      <Text style={styles.renderItem__status}>{item.weather[0].description}</Text>
+      <Text style={styles.renderItem__temp}>{item.temp.toFixed(1)}º</Text>
     </View>
   );
 };
@@ -144,7 +141,7 @@ export default Main = ({route, navigation}) => {
   return (
     <>
       {loading && !weather ? (
-        <Loading/>
+        <Loading />
       ) : (
         <BackgroundImage>
           <View style={styles.main}>
@@ -225,7 +222,7 @@ export default Main = ({route, navigation}) => {
                             fontSize: responsiveFontSize(2.8),
                             fontWeight: 'bold',
                           }}>
-                          {weather[0].main.temp_max.toFixed(1)}
+                          {weather[0].main.temp_max.toFixed(1)}º
                         </Text>
                       </View>
                     </View>
@@ -246,7 +243,7 @@ export default Main = ({route, navigation}) => {
                             fontSize: responsiveFontSize(2.8),
                             fontWeight: 'bold',
                           }}>
-                          {weather[0].main.temp_min.toFixed(1)}
+                          {weather[0].main.temp_min.toFixed(1)}º
                         </Text>
                       </View>
                     </View>
