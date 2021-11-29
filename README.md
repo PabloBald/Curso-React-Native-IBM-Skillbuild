@@ -19,7 +19,8 @@
 
 ----
 ## Paper Prototyping
-        https://www.figma.com/file/w4jkHefMe8caGVFyQq3K61/Weather-app
+
+https://www.figma.com/file/w4jkHefMe8caGVFyQq3K61/Weather-app
 
 El prototipo del diseño se hizo, en primera instancia a mano y luego se proyecto con la herramienta [Figma](https://www.figma.com/)
 
