@@ -61,8 +61,6 @@ const Search = ({navigation}) => {
   };
 
   const handlePressPredictivo = data => {
-    // console.log(data);
-
     const searchData = {
       id: data.id,
       nombre: capitalize(data.nombre),
@@ -104,7 +102,7 @@ const Search = ({navigation}) => {
           <FlatList
             data={filteredCities}
             renderItem={item => (
-              <Button  onPress={() => handlePressPredictivo(item.item)}>
+              <Button onPress={() => handlePressPredictivo(item.item)}>
                 <>
                   {item.item.nombre}, {item.item.provincia.nombre}
                 </>

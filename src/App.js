@@ -12,8 +12,6 @@ const App = () => {
   const [favourites, setFavourites] = useState([]);
 
   useEffect(() => {
-    console.log(1);
-    console.log('app js', favourites);
     storage
       .load({key: 'userFavorites'})
       .then(ret => setFavourites(ret))

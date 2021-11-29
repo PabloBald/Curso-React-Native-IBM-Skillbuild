@@ -3,7 +3,7 @@ import {Platform} from 'react-native';
 import {PERMISSIONS, request} from 'react-native-permissions';
 
 /**
- * 
+ *
  * @returns {string} 'UNAVAILABLE,DENIED,GRANTED,LIMITED,BLOCKED'
  */
 
@@ -12,7 +12,7 @@ const useCheckLocationPermissions = () => {
 
   useEffect(() => {
     getPermission();
-    return ()=>"pepitos check"
+    return () => 'pepitos check';
   }, []);
 
   const getPermission = async () => {
@@ -32,7 +32,6 @@ const useCheckLocationPermissions = () => {
     }
   };
 
-  // console.log(permissionStatus);
   return [permissionStatus];
 };
 

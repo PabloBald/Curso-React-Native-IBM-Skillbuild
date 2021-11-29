@@ -11,7 +11,6 @@ const {Actions, Content, Cover} = Card;
 const Location = data => {
   const {id, lat, lon, name} = data.data;
   const [weather, setWeather] = useState({});
-  const [userFavs, setUserFavs] = useState([]);
 
   // Traemos la data de la api
   useEffect(() => {
@@ -21,10 +20,6 @@ const Location = data => {
     };
     loadWeather();
   }, []);
-
-  useEffect(() => {
-    console.log('favs actualizados');
-  }, [userFavs]);
 
   const cardPress = () => {
     console.log('card pressed');
