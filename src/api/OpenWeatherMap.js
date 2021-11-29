@@ -1,7 +1,7 @@
 //@ts-check
 import {env} from '../../.rnenv.js';
-const urlBaseCurrent = `http://api.openweathermap.org/data/2.5/weather?appid=${env.OPENWEATHER_KEY}&units=metric`;
-const urlOneCall = `https://api.openweathermap.org/data/2.5/onecall?appid=${env.OPENWEATHER_KEY}&units=metric`;
+const urlBaseCurrent = `http://api.openweathermap.org/data/2.5/weather?appid=${env.OPENWEATHER_KEY}&lang=es&units=metric`;
+const urlOneCall = `https://api.openweathermap.org/data/2.5/onecall?appid=${env.OPENWEATHER_KEY}&lang=es&units=metric`;
 
 /**
  * getWeather
