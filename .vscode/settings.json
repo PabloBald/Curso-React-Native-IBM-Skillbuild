@@ -1,9 +1,0 @@
-{
-  "files.associations": {
-    "*.js": "javascriptreact"
-  },
-  "cSpell.words": [
-    "OPENWEATHER",
-    "rnenv"
-  ]
-}
