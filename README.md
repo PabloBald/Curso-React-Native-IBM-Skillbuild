@@ -22,7 +22,7 @@
 
 El prototipo del diseño se hizo, en primera instancia a mano y luego se proyecto con la herramienta [Figma](https://www.figma.com/)
 
-<details><summary>Expandir/Contraerw</summary>
+<details><summary>Expandir/Contraer</summary>
 
 ![about](src/assets/readme/screens/about.jpg) ![forecast](src/assets/readme/screens/forecast.jpg) ![home](src/assets/readme/screens/home.jpg)
 
